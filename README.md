@@ -71,6 +71,7 @@ Il est important de garder une architecture clair, même si vous ne comptez pas 
 <details>
  <summary> Aide </summary>
  Vous pouvez vous aider de ce [tuto](https://youtu.be/MFQhpwc6cKE). D'ailleurs je vous conseille cette chaîne!
+ N'appliquez pas le LookAt qu'il dit de faire, ça provoque des problèmes en 2D.
 </details>
 
 ### Saut du personnage
