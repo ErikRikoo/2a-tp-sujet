@@ -56,8 +56,9 @@ Il est important de garder une architecture clair, même si vous ne comptez pas 
 
 > **Vous utiliserez:**
 > - La classe Input (méthode GetAxis)
+> - Vous pouvez accéder à la position du joueur à travers transform.position 
 > - Utilisation de variables modifiables dans l'éditeur. 
->Utilisez des variables privées avec l'attribut SerializeField.
+> - Utilisez des variables privées avec l'attribut SerializeField.
 
 ### Mouvement de la caméra
 - Créez un script et ajoutez le sur MainCamera
