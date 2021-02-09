@@ -166,23 +166,69 @@ Cassez donc maintenant votre interface pour les entrées en plusieurs interfaces
 
 ## Système plaque de pression-action
 
+On va créer un système qui permet au contact du joueur de déclencher une action, 
+comme faire apparaître un objet, bouger un objet, etc.
 
-## Tir de balles
+### Faire apparaître un objet
+Créez un nouveau objet qui va représenter notre plaque de pression et placez la dans l'environnement.
+Pensez à lui ajouter un Collider comme un Box Collider2D en pensant à cocher le Is Trigger.
+Ajoutez un objet que vous désactiverez (encoche en haut à gauche dans l'inspector) qui sera affiché grâce à la plaque de pression.
 
+Ensuite, créez un MonoBehaviour qui quand un objet entre en collision fait apparaître l'objet que vous venez d'ajouter.
 
-## Ajout d'ennemis
+> **Remarque:**
+> Le Is Trigger permet de dire à Unity que ce Collider n'agit pas sur la physique mais détecte quand même la collision.
+> C'est très pratique quand on veut juste détecter que le joueur est à endroit: plaque de pression, ouverture des portes, etc.
 
+<details>
+ <summary> Aide </summary>
+ Vous pouvez utilisez la methode OnTriggerEnter2D, je vous laisse regarder la doc pour comprendre à quoi elle sert.
+</details>
 
-## Prise en compte des dégats
+### Déplacer un objet
+Maintenant on souhaiterait ajouter une autre plaque de pression plus loin et déplacer un objet au lieu de le faire apparaître.
+Dupliquez votre plaque de pression et ajutez un objet que vous déplacerez.
+Faites les modifications dans votre script pour permettre cela.
+Le même script devra pouvoir bouger un objet mais aussi faire apparaître un objet.
+Pour cela, vous pouvez utiliser une Enum dont la valeur sera sérialisé dans l'éditeur.
 
+> **Remarque:**
+> Pour le déplacement, une simple addition avec la position suffira. Une animation est inutile.
 
-## Affichage de la vie
+> **Vous utiliserez:**
+> - Les [enums](https://docs.microsoft.com/fr-fr/dotnet/csharp/language-reference/builtin-types/enum) qui se construisent exactement comme en C.
+> - Les Switch Case, qui eux aussi s'utilisent comme en C.
 
+### Problème du code actuel & amélioration(s)
+Comme vous pouvez le remarquez, il y a plusieurs problèmes dans le système actuel:
+- Si l'on souhaite ajouter une nouvelle intéraction on doit modifier l'ancien code, il n'est ni fermé ni extensible (Principe ouvert-fermé de SOLID).
+- Actuellement, si on veut juste faire apparaître un objet, le script connait quand même le vecteur de déplacement.
+Cela risque de provoquer une certaine incompréhension à la personne qui pourrait l'utiliser dans l'éditeur par exemple.
 
-## Utilisation des ScriptableObject pour coder des comportements
+Nous devrions appliquer deux principes ici:
+- L'inversion de dépendance déjà évoquée
+- Le principe ouvert-fermé
 
+> **Ouvert-Fermé (Wikipédia):**
+>
+> [...] une classe doit être à la fois ouverte (à l'extension) et fermée (à la modification)
 
-## Utilisation d'un Asset Extérieur: LeanPool
+Pour résumer, il faut éviter les Switch Case ou les GetComponent en série. 
+Vous pouvez remplacer ces mécanismes par le polymorphisme, en utilisant les interfacs ou les MB abstraits.
+
+Réusinez le code de la plaque de pression pour utiliser un MonoBehaviour abstrait.
+
+## Aller plus loin
+Les parties ci-dessous ne seront pas abordées directement dans ce tp. 
+Vous pouvez si vous le désirez les implémentez mais cela ne sera pas noté.
+Elles se trouveront quand même dans la correction.
+
+- Tir de balles
+- Ajout d'ennemis
+- Prise en compte des dégats
+- Affichage de la vie
+- Utilisation des ScriptableObject pour coder des comportements
+- Utilisation d'un Asset Extérieur: LeanPool
 
 
 ## Rendu du TP
@@ -194,6 +240,9 @@ Si ces consignes ne sont pas respectées 2 points seront retirés à la note.
 Vous pouvez rendre le TP en binôme et le nom du rendu devra être de la forme: 2A_NOM_PRENOM_NOM_PRENOM
 
 Chaque jour de retard entraînera 1 point de pénalité.
+
+Si vous souhaitez un retour sur votre code veuillez me l'indiquer au moment de le rendre. 
+Par défaut, je considère que ce n'est pas le cas.
 
 Critères de notation:
 - Fonctionnel
